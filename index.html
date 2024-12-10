@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Notificações</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .notification-container {
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            border-radius: 10px;
+            width: 300px;
+        }
+        input, button {
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="notification-container">
+        <h1>Enviar Notificações</h1>
+        <input type="text" id="notification-message" placeholder="Digite sua mensagem aqui">
+        <button id="send-notification">Enviar Notificação</button>
+    </div>
+
+    <script>
+        // Função para solicitar permissão para enviar notificações
+        function requestNotificationPermission() {
+            if (Notification.permission !== "granted") {
+                Notification.requestPermission();
+            }
+        }
+
+        // Função para enviar a notificação
+        function sendNotification() {
+            const message = document.getElementById('notification-message').value;
+            if (message) {
+                new Notification("Nova Notificação", {
+                    body: message,
+                    icon: 'https://via.placeholder.com/128' // Ícone opcional
+                });
+            } else {
+                alert("Por favor, digite uma mensagem.");
+            }
+        }
+
+        // Solicitar permissão ao carregar o site
+        requestNotificationPermission();
+
+        // Adicionar evento de clique ao botão
+        document.getElementById('send-notification').addEventListener('click', sendNotification);
+    </script>
+</body>
+</html>
